@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
+using OpenAI_API.Models;
 using OpenAIApp.Configuration;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace OpenAIApp.Services
 {
@@ -11,11 +13,39 @@ namespace OpenAIApp.Services
         {
             _config = optionsMonitor.CurrentValue;
         }
+
+        public async Task<string> CheckProgrammingLanguage(string language)
+        {
+            var api = new OpenAI_API.OpenAIAPI(_config.Key);
+
+            var chat = api.Chat.CreateConversation();
+
+            chat.AppendSystemMessage("You are a teacher who help new programmers understand things are programming language or not. " +
+                "If the user tells you a programming language, respond with yes, if a user tells you something which is not a programming language," +
+                " responsd with no. You wil only respond with yes or no. You don't say anything else.");
+
+            chat.AppendUserInput(language);
+            var response = await chat.GetResponseFromChatbotAsync();
+
+            return response;
+        }
+
         public async Task<string> CompleteSentence(string text)
         {
             var api = new OpenAI_API.OpenAIAPI(_config.Key);
             var result = await api.Completions.GetCompletion(text);
+            
             return result;
+        }
+
+        public async Task<string> CompleteSentenceAdvance(string text)
+        {
+            var api = new OpenAI_API.OpenAIAPI(_config.Key);
+
+            var result = await api.Completions.CreateCompletionAsync(
+                new OpenAI_API.Completions.CompletionRequest(text, model: Model.CurieText, temperature: 0));
+            
+            return result.Completions[0].Text;
         }
     }
 }

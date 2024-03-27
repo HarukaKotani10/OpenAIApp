@@ -21,7 +21,16 @@ namespace OpenAIApp.Controllers
         [Route("CompleteSentence")]
         public async Task<IActionResult> CompleteSentence(string text)
         {
-            var result = await _openAIService.CompleteSentence(text);
+            var result = await _openAIService.CompleteSentenceAdvance(text);
+            return Ok(result);
+        }
+
+
+        [HttpPost()]
+        [Route("AskQuestion")]
+        public async Task<IActionResult> AskQuestion(string text)
+        {
+            var result = await _openAIService.CheckProgrammingLanguage(text);
             return Ok(result);
         }
     }
