@@ -1,0 +1,12 @@
+# Ignore appsettings.json
+appsettings.json
+
+# Ignore Visual Studio files
+.vs/
+*.vscode/
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.ide
+*.sln.docstates
