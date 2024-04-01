@@ -34,7 +34,7 @@ namespace OpenAIApp.Services
         {
             var api = new OpenAI_API.OpenAIAPI(_config.Key);
             var result = await api.Completions.GetCompletion(text);
-            
+
             return result;
         }
 
@@ -44,8 +44,24 @@ namespace OpenAIApp.Services
 
             var result = await api.Completions.CreateCompletionAsync(
                 new OpenAI_API.Completions.CompletionRequest(text, model: Model.CurieText, temperature: 0));
-            
+
             return result.Completions[0].Text;
+        }
+
+        public async Task<string> GetCalories(string food)
+        {
+
+            var api = new OpenAI_API.OpenAIAPI(_config.Key);
+            var chat = api.Chat.CreateConversation();
+
+            chat.AppendSystemMessage("You are a calorie counter. Provide the calories of the given food per 100 grams. " +
+                            "If the user asks for calories of a specific food, respond with the corresponding calorie value per 100 grams. " +
+                            "You will only provide calorie values and will not engage in other conversations.");
+            chat.AppendUserInput(food);
+            var response = await chat.GetResponseFromChatbotAsync();
+
+            return response;
+
         }
     }
 }

@@ -33,5 +33,13 @@ namespace OpenAIApp.Controllers
             var result = await _openAIService.CheckProgrammingLanguage(text);
             return Ok(result);
         }
+
+        [HttpPost()]
+        [Route("AskCalories")]
+        public async Task<IActionResult> AskCalories(string text)
+        {
+            var result = await _openAIService.GetCalories(text);
+            return Ok(result);
+        }
     }
 }
