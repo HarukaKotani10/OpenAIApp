@@ -24,8 +24,6 @@ This project is designed to demonstrate how to integrate OpenAI's API with a .NE
   - Completing sentences
   - Identifying programming languages
   - Providing calorie information
-- Robust logging using Microsoft.Extensions.Logging
-- Scalable and maintainable architecture using ASP.NET Core
 
 ## Technologies Used
 
