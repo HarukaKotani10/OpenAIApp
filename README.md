@@ -66,7 +66,6 @@ This project is designed to demonstrate how to integrate OpenAI's API with a .NE
       "OpenAI": {
         "ApiKey": "YOUR_API_KEY"
       },
-      // Other settings
     }
     ```
 
