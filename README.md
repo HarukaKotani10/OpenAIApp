@@ -1,7 +1,3 @@
-Here's the updated README file reflecting the correct functionality of the `AskQuestion` endpoint:
-
----
-
 # OpenAI Integration API
 
 This .NET application integrates with OpenAI's API to provide intelligent conversational capabilities. The project consists of backend endpoints for various tasks such as completing sentences, identifying programming languages, and providing calorie information based on user input.
